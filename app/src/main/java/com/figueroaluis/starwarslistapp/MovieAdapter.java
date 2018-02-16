@@ -70,7 +70,7 @@ public class MovieAdapter extends BaseAdapter {
             // views
             holder.titleTextView = convertView.findViewById(R.id.movie_list_title);
             holder.descriptionTextView = convertView.findViewById(R.id.movie_list_description);
-            // holder.charactersTextView = convertView.findViewById(R.id.movie_list_main_characters);
+            holder.charactersTextView = convertView.findViewById(R.id.movie_list_main_characters);
             holder.hasSeenTextView = convertView.findViewById(R.id.move_list_has_seen);
             holder.thumbnailImageView = convertView.findViewById(R.id.movie_list_thumbnail);
             // add the holder to the view, for future use
@@ -81,7 +81,7 @@ public class MovieAdapter extends BaseAdapter {
 
         TextView titleTextView = holder.titleTextView;
         TextView descriptionTextView = holder.descriptionTextView;
-        // TextView charactersTextView = holder.charactersTextView;
+        TextView charactersTextView = holder.charactersTextView;
         TextView hasSeenTextView = holder.hasSeenTextView;
         ImageView thumbnailImageView = holder.thumbnailImageView;
 
@@ -100,7 +100,15 @@ public class MovieAdapter extends BaseAdapter {
         descriptionTextView.setTextSize(9);
 
         // main characters text view
-        // charactersTextView.setText("Placeholder");
+        if(movie.mainCharacters.size() >= 3){
+            String mainCharacters = "";
+            for(int i = 0; i < 3; i++){
+                mainCharacters += movie.mainCharacters.get(i) + " ";
+            }
+            charactersTextView.setText(mainCharacters);
+            charactersTextView.setTextSize(13);
+        }
+
 
         // has seen text view
         hasSeenTextView.setText("Has Seen?");
@@ -120,7 +128,7 @@ public class MovieAdapter extends BaseAdapter {
     private static class ViewHolder{
         public TextView titleTextView;
         public TextView descriptionTextView;
-        // public TextView charactersTextView;
+        public TextView charactersTextView;
         public TextView hasSeenTextView;
         public ImageView thumbnailImageView;
 

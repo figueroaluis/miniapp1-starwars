@@ -18,7 +18,7 @@ public class Movie {
     // instance variables or fields
     String title;
     String episode;
-    //ArrayList<String> mainCharacters;
+    ArrayList<String> mainCharacters;
     String description;
     String posterUrl;
     String movieUrl;
@@ -52,10 +52,12 @@ public class Movie {
                 movie.title = movies.getJSONObject(i).getString("title");
                 movie.episode = movies.getJSONObject(i).getString("episode_number");
                 // do a for loop here to populate it with an array list
-//                JSONArray main_characters = movies.getJSONObject(i).getJSONArray("main_characters");
-//                for(int j = 0; j < main_characters.length(); j++){
-//                    movie.mainCharacters.add(main_characters.getJSONObject(j).toString());
-//                }
+                JSONArray main_characters = movies.getJSONObject(i).getJSONArray("main_characters");
+                movie.mainCharacters = new ArrayList<>();
+                for(int j = 0; j < main_characters.length(); j++){
+                    // System.out.println("Episode " + i + ": " + main_characters.get(j).toString());
+                    movie.mainCharacters.add(main_characters.get(j).toString());
+                }
                 movie.description = movies.getJSONObject(i).getString("description");
                 movie.posterUrl = movies.getJSONObject(i).getString("poster");
                 movie.movieUrl = movies.getJSONObject(i).getString("url");
