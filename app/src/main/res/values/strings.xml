@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">StarList</string>
     <string name="thumbnail">"This is the movie thumbnail."</string>
+    <string name="has_seen_button">"Already Seen"</string>
+    <string name="want_to_see_button">"I Want To Watch It"</string>
+    <string name="do_not_like_button">"Didn't Like It"</string>
+    <string name="submit_button">"Submit"</string>
 </resources>

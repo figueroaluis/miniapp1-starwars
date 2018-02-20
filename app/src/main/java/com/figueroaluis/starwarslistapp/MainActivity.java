@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     // create a context variable
     private Context mContext;
 
+    private ArrayList<Movie> movieList;
+    private MovieAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         // data to display
-        final ArrayList<Movie> movieList = Movie.getMoviesFromFile("movies.json", this);
+        movieList = Movie.getMoviesFromFile("movies.json", this);
 
         // create the adapter
-        MovieAdapter adapter = new MovieAdapter(this, movieList);
+        adapter = new MovieAdapter(this, movieList);
 
         // find the list view in the layout
         // set the adapter to listview
@@ -56,12 +60,45 @@ public class MainActivity extends AppCompatActivity {
                 detailIntent.putExtra("title", selectedMovie.title);
                 detailIntent.putExtra("poster", selectedMovie.posterUrl);
                 detailIntent.putExtra("description", selectedMovie.description);
+                detailIntent.putExtra("position", position);
 
                 // start the activity by passing the intent
-                startActivity(detailIntent);
+                startActivityForResult(detailIntent, 1);
+
             }
         });
+
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // include every time we want to override stuff!
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) { // this means that the second activity is sending data
+                boolean hasSeen = data.getBooleanExtra("hasSeen", false);
+                boolean wantToSee = data.getBooleanExtra("wantToSee", false);
+                boolean didNotLike = data.getBooleanExtra("didNotLike", false);
+                int position = data.getIntExtra("position", 0);
+
+                Movie selectedMovie = movieList.get(position);
+
+                // this is for debugging
+                // int position = data.getIntExtra("position", 0);
+
+                if (hasSeen) {
+                    selectedMovie.movieStatus = "I Have Seen It";
+                } else if (wantToSee) {
+                    selectedMovie.movieStatus = "I Want To Watch It";
+                } else if (didNotLike) {
+                    selectedMovie.movieStatus = "I Didn't Like It";
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+        }
+    }
 
 }

@@ -22,6 +22,7 @@ public class Movie {
     String description;
     String posterUrl;
     String movieUrl;
+    String movieStatus;
 
     // constructor
     // default
@@ -61,6 +62,9 @@ public class Movie {
                 movie.description = movies.getJSONObject(i).getString("description");
                 movie.posterUrl = movies.getJSONObject(i).getString("poster");
                 movie.movieUrl = movies.getJSONObject(i).getString("url");
+
+                movie.movieStatus = "Has Seen?";
+
 
                 // add to arraylist
                 movieList.add(movie);

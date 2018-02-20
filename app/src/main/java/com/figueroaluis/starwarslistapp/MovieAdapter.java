@@ -63,7 +63,7 @@ public class MovieAdapter extends BaseAdapter {
         // check to see if the view already exists
         // if yes, don't need to infalce and just findViewById
         if(convertView == null){
-            // infalte
+            // inflate
             convertView = mInflater.inflate(R.layout.list_item_movie, parent, false);
             // add the views to the holder
             holder = new ViewHolder();
@@ -71,7 +71,7 @@ public class MovieAdapter extends BaseAdapter {
             holder.titleTextView = convertView.findViewById(R.id.movie_list_title);
             holder.descriptionTextView = convertView.findViewById(R.id.movie_list_description);
             holder.charactersTextView = convertView.findViewById(R.id.movie_list_main_characters);
-            holder.hasSeenTextView = convertView.findViewById(R.id.move_list_has_seen);
+            holder.movieStatusTextView = convertView.findViewById(R.id.movie_list_has_seen);
             holder.thumbnailImageView = convertView.findViewById(R.id.movie_list_thumbnail);
             // add the holder to the view, for future use
             convertView.setTag(holder);
@@ -82,7 +82,7 @@ public class MovieAdapter extends BaseAdapter {
         TextView titleTextView = holder.titleTextView;
         TextView descriptionTextView = holder.descriptionTextView;
         TextView charactersTextView = holder.charactersTextView;
-        TextView hasSeenTextView = holder.hasSeenTextView;
+        TextView movieStatusTextView = holder.movieStatusTextView;
         ImageView thumbnailImageView = holder.thumbnailImageView;
 
         // get the correspoding movie for each row
@@ -99,19 +99,22 @@ public class MovieAdapter extends BaseAdapter {
         descriptionTextView.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
         descriptionTextView.setTextSize(9);
 
-        // main characters text view
-        if(movie.mainCharacters.size() >= 3){
+        // main characters text view, change displayedCharacters if you want to show more in the main screen
+        int displayedCharacters = 3;
+        if(movie.mainCharacters.size() >= displayedCharacters){
             String mainCharacters = "";
-            for(int i = 0; i < 3; i++){
-                mainCharacters += movie.mainCharacters.get(i) + " ";
+            for(int i = 0; i < displayedCharacters; i++){
+                mainCharacters += movie.mainCharacters.get(i);
+                if(i < displayedCharacters-1){
+                    mainCharacters += ", ";
+                }
             }
             charactersTextView.setText(mainCharacters);
             charactersTextView.setTextSize(13);
         }
 
+        movieStatusTextView.setText(movie.movieStatus);
 
-        // has seen text view
-        hasSeenTextView.setText("Has Seen?");
 
         // load image view
         // use the picasso library to load image from the url
@@ -124,12 +127,12 @@ public class MovieAdapter extends BaseAdapter {
     // viewHolder
     // is used to customize what you want to put into the view
     // it depends on the layout design of your row
-    // this will be a prvate static class you have to define
+    // this will be a private static class you have to define
     private static class ViewHolder{
         public TextView titleTextView;
         public TextView descriptionTextView;
         public TextView charactersTextView;
-        public TextView hasSeenTextView;
+        public TextView movieStatusTextView;
         public ImageView thumbnailImageView;
 
     }

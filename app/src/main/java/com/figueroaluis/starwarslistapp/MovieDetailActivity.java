@@ -1,9 +1,13 @@
 package com.figueroaluis.starwarslistapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -23,6 +27,14 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private ScrollView detailScrollView;
 
+    // submit button
+    private Button submitButton;
+
+    // set boolean variables for pressing the buttons
+    private boolean hasSeen;
+    private boolean wantToSee;
+    private boolean didNotLike;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -37,6 +49,33 @@ public class MovieDetailActivity extends AppCompatActivity {
         title = detailScrollView.findViewById(R.id.movie_detail_title);
         poster = detailScrollView.findViewById(R.id.movie_detail_poster);
         description = detailScrollView.findViewById(R.id.movie_detail_description);
+        submitButton = detailScrollView.findViewById(R.id.submit_button);
+
+        final int position = this.getIntent().getExtras().getInt("position");
+
+        // set an onClickListener for the submit button
+        submitButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent submitButtonIntent = new Intent();
+
+                // get the position
+
+                // put the boolean values into the intent and send back
+                submitButtonIntent.putExtra("hasSeen", hasSeen);
+                submitButtonIntent.putExtra("wantToSee", wantToSee);
+                submitButtonIntent.putExtra("didNotLike", didNotLike);
+                submitButtonIntent.putExtra("position", position);
+
+
+                setResult(RESULT_OK, submitButtonIntent);
+
+                finish(); // this will finish the activity
+            }
+
+        });
+
+
 
         // need to put the title of the movie as title of the activity
         // need the url for the poster
@@ -61,4 +100,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         // create the scroll view and load all the info
 
     }
+
+    public void hasSeen(View view){
+        hasSeen = ((RadioButton) view).isChecked();
+    }
+
+    public void wantToSee(View view){
+        wantToSee = ((RadioButton) view).isChecked();
+    }
+
+    public void didNotLike(View view){
+        didNotLike = ((RadioButton) view).isChecked();
+    }
+
 }

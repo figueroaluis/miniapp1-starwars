@@ -57,15 +57,16 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/move_list_has_seen"
+            android:id="@+id/movie_list_has_seen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:textSize="11sp"
-            android:layout_below="@id/movie_list_main_characters"
-            android:text="TextView" />
+            android:text="Has Seen?"
+            android:layout_below="@id/movie_list_main_characters" />
 
     </RelativeLayout>
 

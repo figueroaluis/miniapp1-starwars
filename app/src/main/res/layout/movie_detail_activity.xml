@@ -50,10 +50,56 @@
                 android:textSize="18sp"
                 android:text="TextView" />
 
+            <RadioGroup
+                android:id="@+id/radio_button_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/movie_detail_description">
+
+                <RadioButton
+                    android:id="@+id/has_seen_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/has_seen_button"
+                    android:onClick="hasSeen"/>
+
+                <RadioButton
+                    android:id="@+id/want_to_see_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/has_seen_radio_button"
+                    android:text="@string/want_to_see_button"
+                    android:onClick="wantToSee" />
+
+                <RadioButton
+                    android:id="@+id/do_not_like_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/want_to_see_radio_button"
+                    android:text="@string/do_not_like_button"
+                    android:onClick="didNotLike"/>
+
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/submit_button" />
+
+            </RadioGroup>
+
+
         </LinearLayout>
 
 
+
+
+
+
     </ScrollView>
+
+
 
 
 </RelativeLayout>
