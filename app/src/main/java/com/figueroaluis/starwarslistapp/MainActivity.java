@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Movie> movieList;
     private MovieAdapter adapter;
+    private TextView movieStatusView;
 
 
     @Override
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // data to display
         movieList = Movie.getMoviesFromFile("movies.json", this);
 
+
         // create the adapter
         adapter = new MovieAdapter(this, movieList);
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // set the adapter to listview
         mListView = findViewById(R.id.movie_list_view);
         mListView.setAdapter(adapter);
+
 
         // each row should be clickable
         // so that a movie detail page is created when you click on it
@@ -82,17 +86,16 @@ public class MainActivity extends AppCompatActivity {
                 boolean didNotLike = data.getBooleanExtra("didNotLike", false);
                 int position = data.getIntExtra("position", 0);
 
-                Movie selectedMovie = movieList.get(position);
 
                 // this is for debugging
                 // int position = data.getIntExtra("position", 0);
 
                 if (hasSeen) {
-                    selectedMovie.movieStatus = "I Have Seen It";
+                    movieList.get(position).movieStatus = "Have Seen It";
                 } else if (wantToSee) {
-                    selectedMovie.movieStatus = "I Want To Watch It";
+                    movieList.get(position).movieStatus = "Want To Watch It";
                 } else if (didNotLike) {
-                    selectedMovie.movieStatus = "I Didn't Like It";
+                    movieList.get(position).movieStatus = "Didn't Like It";
                 }
 
                 adapter.notifyDataSetChanged();

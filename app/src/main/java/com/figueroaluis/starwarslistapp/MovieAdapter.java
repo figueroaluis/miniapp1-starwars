@@ -1,6 +1,7 @@
 package com.figueroaluis.starwarslistapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,6 +115,16 @@ public class MovieAdapter extends BaseAdapter {
         }
 
         movieStatusTextView.setText(movie.movieStatus);
+        // default color for text
+        movieStatusTextView.setTextColor(Color.GRAY);
+        // color for modified text
+        if(movie.movieStatus.equals("Have Seen It")){
+            movieStatusTextView.setTextColor(Color.GREEN);
+        } else if(movie.movieStatus.equals("Want To Watch It")){
+            movieStatusTextView.setTextColor(Color.CYAN);
+        } else if(movie.movieStatus.equals("Didn't Like It")){
+            movieStatusTextView.setTextColor(Color.RED);
+        }
 
 
         // load image view
